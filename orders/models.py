@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from restaurants.models import Restaurant, Product
+from products.models import Product
+from restaurants.models import Restaurant
 
 User = get_user_model()
 

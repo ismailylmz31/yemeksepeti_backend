@@ -5,7 +5,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-
+    
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_groups',
