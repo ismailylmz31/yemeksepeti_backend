@@ -3,10 +3,12 @@ from .models import Order, OrderItem
 
 class OrderItemSerializer(serializers.ModelSerializer):
     total_price = serializers.ReadOnlyField(source='get_total_price')
+    product_name = serializers.ReadOnlyField(source='product.name')
+    product_price = serializers.ReadOnlyField(source='product.price')
 
     class Meta:
         model = OrderItem
-        fields = ['id', 'order', 'product', 'quantity', 'price', 'total_price']
+        fields = ['id', 'order', 'product', 'product_name', 'product_price', 'quantity', 'total_price']
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)

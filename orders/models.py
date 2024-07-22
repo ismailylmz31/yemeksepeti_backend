@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='orders')
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='orders')    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50, default='Pending')
@@ -20,3 +20,6 @@ class OrderItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.price
+    
+    def __str__(self):
+        return f'{self.product.name} ({self.quantity})'
