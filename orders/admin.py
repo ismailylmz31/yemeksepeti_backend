@@ -7,11 +7,11 @@ class OrderItemInline(admin.TabularInline):
     extra = 1
 
 class OrderAdmin(admin.ModelAdmin):
+    inlines = [OrderItemInline]
     list_display = ('customer', 'restaurant', 'status', 'created_at', 'total_price')
     search_fields = ('customer__username', 'restaurant__name', 'status')
     list_filter = ('status', 'created_at')
-    inlines = [OrderItemInline]
-
+    
 
 
 class OrderItemAdmin(admin.ModelAdmin):
