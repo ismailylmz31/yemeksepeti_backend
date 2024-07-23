@@ -11,7 +11,7 @@ class MenuSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
-        fields = ['id', 'restaurant', 'name', 'description', 'items']
+        fields = ['id', 'restaurant', 'name', 'description', 'items','image_url']
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
