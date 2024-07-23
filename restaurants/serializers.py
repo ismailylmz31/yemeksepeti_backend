@@ -26,7 +26,7 @@ class OfferSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Offer
-        fields = ['title','description','is_exist','image_url','restaurants']
+        fields = ['title','description','is_exist','image_url','restaurant']
     
 
 
