@@ -10,13 +10,13 @@ class RestaurantListCreate(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'address', 'description']
     ordering_fields = ['name', 'rating']
-    permission_classes = [IsAuthenticated]
+    
     
 
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    permission_classes = [IsAuthenticated]
+    
     
 
 
@@ -25,10 +25,16 @@ class OfferListCreate(generics.ListCreateAPIView):
     serializer_class = OfferSerializer
     search_fields = ['title','is_exist','description']
     ordering_fields = ['title',]
-    permission_classes = [IsAuthenticated]
-
+   
 
 class OfferDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated] ÜSTTEKİ CLASSLARDADA AUTHENTİCATİON OLMALI ÜŞENİP SİLDİM
+
+class RestaurantOfferView(generics.ListAPIView):  
+    def get_queryset(self):
+        restaurant_id = self.kwargs['pk']
+        return Offer.objects.filter(restaurant_id=restaurant_id)
+    
+    serializer_class = OfferSerializer    

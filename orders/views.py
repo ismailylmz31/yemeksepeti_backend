@@ -6,7 +6,7 @@ from .serializers import OrderSerializer
 class OrderListCreate(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    
 
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user)
@@ -14,4 +14,4 @@ class OrderListCreate(generics.ListCreateAPIView):
 class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    

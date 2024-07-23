@@ -6,4 +6,4 @@ from .serializers import OrderStatusSerializer
 class OrderStatusDetail(generics.RetrieveUpdateAPIView):
     queryset = OrderStatus.objects.all()
     serializer_class = OrderStatusSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]

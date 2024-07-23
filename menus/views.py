@@ -6,7 +6,7 @@ from .serializers import MenuSerializer
 class MenuListCreate(generics.ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticated]
+    
 
     def perform_create(self, serializer):
         restaurant = self.request.data.get('restaurant')
@@ -15,4 +15,10 @@ class MenuListCreate(generics.ListCreateAPIView):
 class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticated]
+
+class RestaurantMenusView(generics.ListAPIView):  
+    def get_queryset(self):
+        restaurant_id = self.kwargs['pk']
+        return Menu.objects.filter(restaurant_id=restaurant_id)
+    
+    serializer_class = MenuSerializer
