@@ -1,7 +1,7 @@
 from rest_framework import generics, filters
 from rest_framework.permissions import IsAuthenticated
-from .models import Restaurant
-from .serializers import RestaurantSerializer
+from .models import Offer, Restaurant
+from .serializers import OfferSerializer, RestaurantSerializer
 
 
 class RestaurantListCreate(generics.ListCreateAPIView):
@@ -20,6 +20,15 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     
 
 
+class OfferListCreate(generics.ListCreateAPIView):
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
+    search_fields = ['title','is_exist','description']
+    ordering_fields = ['title',]
+    permission_classes = [IsAuthenticated]
 
 
-
+class OfferDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
+    permission_classes = [IsAuthenticated]
