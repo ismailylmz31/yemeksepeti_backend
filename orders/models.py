@@ -28,7 +28,7 @@ class OrderItem(models.Model):
         if self.product:
             return self.product.price
         elif self.menu:
-            return self.menu.price
+            return self.menu.total_price
         return 0
 
     @property
