@@ -12,38 +12,25 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50, default='Pending')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    def get_total_order_price(self):
-        return sum(item.get_total_price() for item in self.items.all())
-    # def update_total_price(self):
-    #     total = sum(item.get_total_price() for item in self.items.all())
-    #     self.total_price = total
-    #     self.save()
+    
+    @property
+    def total_price(self):
+        return sum(item.total_price for item in self.items.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product,blank=True,null=True, on_delete=models.CASCADE)
-    menu = models.ForeignKey(Menu, blank=True,null=True,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, blank=True, null=True, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, blank=True, null=True, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    def get_total_price(self):
-        return self.product.price * self.quantity
-    # def save(self, *args, **kwargs):
-    #     if self.product:
-    #         self.price = self.product.price
-    #     super().save(*args, **kwargs)
-       
-    # def get_total_price(self):
-    #     if self.product and self.price:
-    #         return self.quantity * self.price
-    #     return 0
 
-    # def __str__(self):
-    #     return f'{self.product} - {self.quantity}'
-    
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     self.order.update_total_price()
-    
-    # def __str__(self):
-    #     return f'{self.product.name} ({self.quantity})'
+    @property
+    def price(self):
+        if self.product:
+            return self.product.price
+        elif self.menu:
+            return self.menu.price
+        return 0
+
+    @property
+    def total_price(self):
+        return self.price * self.quantity

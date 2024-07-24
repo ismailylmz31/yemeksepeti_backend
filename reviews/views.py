@@ -15,3 +15,11 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     # permission_classes = [IsAuthenticated]
+
+
+class RestaurantReviewsView(generics.ListAPIView):  
+    def get_queryset(self):
+        restaurant_id = self.kwargs['pk']
+        return Review.objects.filter(restaurant_id=restaurant_id)
+    
+    serializer_class = ReviewSerializer
