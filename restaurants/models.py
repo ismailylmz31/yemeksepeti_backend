@@ -10,7 +10,9 @@ class Restaurant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     rating = models.PositiveIntegerField(null=True,blank=True,default=5)
-    min_price = models.DecimalField(default=0,null=True,blank=True,max_digits=2,decimal_places=0)
+    min_basket_price = models.DecimalField(default=0,null=True,blank=True,max_digits=3,decimal_places=0)
+    delivery_price=models.DecimalField(default=0,null=True,blank=True,max_digits=2,decimal_places=0)
+    delivery_time=models.CharField(default='30-45 dk',max_length=400)
 
     def __str__(self):
         return self.name

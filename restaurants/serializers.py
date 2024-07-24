@@ -8,7 +8,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Restaurant
-        fields = ['id', 'owner', 'name', 'address', 'phone', 'created_at', 'updated_at','image_url','rating','categories','min_price']
+        fields = ['id', 'owner', 'name', 'address', 'phone', 'created_at', 'updated_at','image_url','rating','categories','min_basket_price','delivery_price','delivery_time']
         read_only_fields = ['owner']
 
     # def get_image_url(self, obj):

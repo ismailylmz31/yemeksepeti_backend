@@ -6,7 +6,7 @@ from .models import Offer, Restaurant
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'address', 'created_at','rating')
+    list_display = ('name', 'owner', 'address', 'created_at','rating','min_basket_price','delivery_price','delivery_time')
     search_fields = ('name', 'owner__username')
     list_filter = ('created_at',)
 
