@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
    
 
 class ProductSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
+    
 
     class Meta:
         model = Product
